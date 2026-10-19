@@ -331,6 +331,12 @@ app.querySelector<HTMLInputElement>('#invoice-month')!.addEventListener('input',
   const label = new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric', timeZone: 'UTC' })
     .format(new Date(Date.UTC(year, month - 1, 1)))
   app.querySelector('#claim-month-label')!.textContent = label
+
+  const today = new Date()
+  const invoiceDate = [today.getDate(), today.getMonth() + 1, today.getFullYear()]
+    .map((part, index) => index < 2 ? String(part).padStart(2, '0') : String(part))
+    .join('-')
+  app.querySelector<HTMLInputElement>('[aria-label="Invoice date"]')!.value = invoiceDate
 })
 
 app.querySelector<HTMLButtonElement>('#print-invoice')!.addEventListener('click', () => window.print())
