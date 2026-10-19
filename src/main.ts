@@ -333,6 +333,9 @@ app.querySelector<HTMLInputElement>('#invoice-month')!.addEventListener('input',
   app.querySelector('#claim-month-label')!.textContent = label
 
   const today = new Date()
+  const currentMonth = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}`
+  if (monthValue !== currentMonth) return
+
   const invoiceDate = [today.getDate(), today.getMonth() + 1, today.getFullYear()]
     .map((part, index) => index < 2 ? String(part).padStart(2, '0') : String(part))
     .join('-')
